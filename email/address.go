@@ -13,7 +13,7 @@ type Address struct {
 	local  string
 }
 
-func NewAddress(emailString string) (Address, error) {
+func ParseAddress(emailString string) (Address, error) {
 	// TODO: check validity of local & domain
 
 	if !ValidateAddress(emailString) {
