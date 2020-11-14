@@ -13,6 +13,8 @@ type Address struct {
 	local  string
 }
 
+var email_regex = regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
+
 func ParseAddress(emailString string) (Address, error) {
 	// TODO: check validity of local & domain
 
@@ -39,8 +41,8 @@ func ValidateAddress(addr string) bool {
 	}
 
 	// regex checks if the email syntax is valid according to the standard
-	_, err := regexp.MatchString("^[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", "doesthiswork@gmail.com")
-	if err != nil {
+	boolean := email_regex.MatchString("doesthiswork@gmail.com")
+	if !boolean  {
 		return false
 	}
 
