@@ -25,9 +25,6 @@ func NewAddress(emailString string) (Address, error) {
 	return Address{domain: addrSlice[1], local: addrSlice[0]}, nil
 }
 
-func (addr Address) Disassemble() (string, string) {
-	return addr.domain, addr.local
-}
 
 func (a Address) String() string {
 	return a.local + "@" + a.domain
