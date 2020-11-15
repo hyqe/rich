@@ -2,7 +2,7 @@ package email
 
 import (
 	"errors"
-	"fmt"
+	"fmt"	
 	"net"
 	"regexp"
 	"strings"
@@ -16,9 +16,9 @@ type Address struct {
 var email_regex = regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
 
 func ParseAddress(emailString string) (Address, error) {
-	// TODO: check validity of local & domain
 
 	if !ValidateAddress(emailString) {
+		fmt.Println("\t----This is the bad data: ", emailString)
 		return Address{domain: "bad1", local: "data2"}, errors.New("bad data")
 	}
 
@@ -33,7 +33,6 @@ func (a Address) String() string {
 }
 
 func ValidateAddress(addr string) bool {
-	fmt.Println("Did you pass by here?")
 
 	// checks if the address is too short or too long
 	if len(addr) < 3 && len(addr) > 254 {
@@ -41,7 +40,7 @@ func ValidateAddress(addr string) bool {
 	}
 
 	// regex checks if the email syntax is valid according to the standard
-	boolean := email_regex.MatchString("doesthiswork@gmail.com")
+	boolean := email_regex.MatchString(addr)
 	if !boolean  {
 		return false
 	}

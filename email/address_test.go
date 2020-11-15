@@ -3,19 +3,24 @@ package email
 import (
 	"fmt"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
 func TestNewAddress(t *testing.T) {
 	local := "Luke.Ochoa"
 	domain := "gmail.com"
-	addr, err := NewAddress(local + "@" + domain)
+	addr, err := ParseAddress(local + "@" + domain)
 
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	assert.Equal(t, addr.String(), "Luke.Ochoa@gmail.com")
 	fmt.Println(addr)
+
+	addr, err = ParseAddress(" BadEmail" + "@" + "fake.lol")
+	if err != nil {
+		t.Fatal(err)
+	}
+	fmt.Println(addr)
+
+
 }
