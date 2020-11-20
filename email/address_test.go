@@ -73,7 +73,7 @@ func TestNewAddress(t *testing.T) {
 
 	for _, test := range failingTests {
 		value, err := ParseAddress(test)
-		if err == nil {
+		if err != nil {
 			fmt.Println("failed to err email address ", value, err)
 		}
 	}

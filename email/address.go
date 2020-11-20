@@ -6,11 +6,6 @@ import (
 	"strings"
 )
 
-type Address struct {
-	domain string
-	local  string
-}
-
 
 var email_regex = regexp.MustCompile(`\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\b`)
 
@@ -23,10 +18,6 @@ func ParseAddress(emailString string) (string, error) {
 	return emailString, nil
 }
 
-
-func (a Address) String() string {
-	return a.local + "@" + a.domain
-}
 
 func ValidateAddress(addr string) bool {
 
