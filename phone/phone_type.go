@@ -1,12 +1,62 @@
 package phone
 
-type Number struct {
-	Country_code string
-	Area_code    string
-	Phone_number string
+import (
+	"errors"
+	"regexp"
+)
+
+
+var phone_regex = regexp.MustCompile(`^\+[1-9]\d{1,14}$`)
+
+
+func ParsePhone(phone string) (string, error) {
+
+	if !validatePhone(phone) {
+		return phone, errors.New("bad phone number")
+	}
+
+	return phone, nil
 }
 
-func (n Number) String() string {
-	return "+" + n.Country_code + n.Area_code + n.Phone_number
+func validatePhone(number string) bool {
+
+	boolean := phone_regex.MatchString("+" + number)
+	if !boolean {
+		return false
+	}
+	return true
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
