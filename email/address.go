@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-var email_regex = regexp.MustCompile(`\b^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\b`)
+var emailRegex = regexp.MustCompile(`\b^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\b`)
 
 func ParseAddress(emailString string) (string, error) {
 
@@ -25,7 +25,7 @@ func ValidateAddress(addr string) bool {
 	}
 
 	// regex checks if the email syntax is valid according to the standard
-	boolean := email_regex.MatchString(addr)
+	boolean := emailRegex.MatchString(addr)
 	if !boolean {
 		return false
 	}
