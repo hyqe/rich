@@ -1,58 +1,41 @@
 package phone
 
-
 import (
 	"fmt"
 	"testing"
 )
 
+var passingTests = []string{
+	"14089991234",
+	"112097772222",
+	"19259993344",
+	"+1(123) 123-1234",
+}
 
-
-//var passingTests []string {
-//	"4089991234",
-//	"2097772222",
-//	"9259993344",
-//}
-//
-//var failingTests []string {
-//	"412",
-//	"",
-//	"444333111",
-//	"44443331111",
-//}
-
-
-var allTests = []string {
+var failingTests = []string{
 	"412",
 	"",
 	"444333111",
 	"44443331111",
-	"4089991234",
-	"2097772222",
-	"9259993344",
-	"+1(123) 123-1234",
 }
 
 func TestNewPhone(t *testing.T) {
 
-	var array1 []string
-	var result string
-	for _, test := range allTests {
+	for _, test := range passingTests {
+		value, err := ParsePhone(test)
+
+		if err != nil {
+			fmt.Println("Phone number failed to pass: ", value)
+			t.Fatal(err)
+		}
+	}
+
+	for _, test := range failingTests {
 		value, err := ParsePhone(test)
 
 		if err == nil {
-			result = "PASS"
-		} else {
-			result = "FAIL"
+			fmt.Println("Failed to parse Phone number correctly: ", value)
+			t.Fatal(err)
 		}
-		array1 = append(array1, fmt.Sprintf("(%s) - (%s)\n", value, result))
 	}
-
-	fmt.Println(array1)
-
-
-
-
-
-
 }

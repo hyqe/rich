@@ -6,12 +6,12 @@ import (
 	"strings"
 )
 
-var phone_regex = regexp.MustCompile(`\+1[1-9]\d{9}`)
-var extract_numbers = regexp.MustCompile(`\d+`)
+var phoneRegex = regexp.MustCompile(`\+1[1-9]\d{9}`)
+var extractNumbers = regexp.MustCompile(`\d+`)
 
 func ParsePhone(phone string) (string, error) {
 
-	phone = strings.Join(extract_numbers.FindAllString(phone, -1), "")
+	phone = strings.Join(extractNumbers.FindAllString(phone, -1), "")
 
 	if !validatePhone(phone) {
 		return phone, errors.New("bad phone number")
@@ -22,7 +22,7 @@ func ParsePhone(phone string) (string, error) {
 
 func validatePhone(number string) bool {
 
-	boolean := phone_regex.MatchString("+" + number)
+	boolean := phoneRegex.MatchString("+" + number)
 	if !boolean {
 		return false
 	}
