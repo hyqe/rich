@@ -30,6 +30,7 @@ var allTests = []string {
 	"4089991234",
 	"2097772222",
 	"9259993344",
+	"+1(123) 123-1234",
 }
 
 func TestNewPhone(t *testing.T) {
