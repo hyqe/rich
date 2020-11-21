@@ -6,8 +6,7 @@ import (
 	"strings"
 )
 
-
-var phone_regex = regexp.MustCompile(`^\+[1-9]\d{1,14}$`)
+var phone_regex = regexp.MustCompile(`\+1[1-9]\d{9}`)
 var extract_numbers = regexp.MustCompile(`\d+`)
 
 func ParsePhone(phone string) (string, error) {
@@ -29,37 +28,3 @@ func validatePhone(number string) bool {
 	}
 	return true
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
