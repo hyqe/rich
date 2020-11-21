@@ -6,8 +6,7 @@ import (
 	"strings"
 )
 
-
-var email_regex = regexp.MustCompile(`\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\b`)
+var email_regex = regexp.MustCompile(`\b^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\b`)
 
 func ParseAddress(emailString string) (string, error) {
 
@@ -18,7 +17,6 @@ func ParseAddress(emailString string) (string, error) {
 	return emailString, nil
 }
 
-
 func ValidateAddress(addr string) bool {
 
 	// checks if the address is too short or too long
@@ -28,7 +26,7 @@ func ValidateAddress(addr string) bool {
 
 	// regex checks if the email syntax is valid according to the standard
 	boolean := email_regex.MatchString(addr)
-	if !boolean  {
+	if !boolean {
 		return false
 	}
 
@@ -37,10 +35,12 @@ func ValidateAddress(addr string) bool {
 	if len(addrSlice[0]) < 3 {
 		return false
 	}
-
+	if string([]rune(addrSlice[1])[0]) == "." {
+		return false
+	}
+	if string([]rune(addr)[len(addr)-2]) == "." {
+		return false
+	}
 
 	return true
 }
-
-
-
